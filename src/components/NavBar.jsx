@@ -22,7 +22,8 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-start',
-    width: '1300px',
+    maxWidth: '1300px',
+    width: '90vw'
     // border: '1px solid blue'
   },
   headerContentRow: {
@@ -111,8 +112,7 @@ const NavBar = () => {
                   <button
                     className="dropbtn"
                     onClick={() => {
-                      console.log('category triggered')
-                      history.push(`/browse/${category}`)
+                      document.location.pathname = `/browse/${category}`
                     }}
                   >
                     {category}
@@ -128,8 +128,7 @@ const NavBar = () => {
                           >
                             <button
                               onClick={() => {
-                                console.log('triggered')
-                                document.location.pathname = `browse/${category}/${subCategory}`
+                                document.location.pathname = `/browse/${category}/${subCategory}`
                               }}
                               className="dropbtn2"
                             >

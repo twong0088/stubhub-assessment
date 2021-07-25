@@ -46,7 +46,8 @@ const useStyles = makeStyles((theme) => ({
 
   },
   container: {
-    width: '1300px',
+    maxWidth: '1300px',
+    width: '90vw',
     display: 'flex',
     flexDirection: 'column'
   },
