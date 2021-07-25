@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  font-family: Helvetica Neue,Helvetica,Arial;
 }
 
 .App-logo {
@@ -35,4 +36,121 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.navbar {
+  overflow: hidden;
+  /* margin-bottom: 3px; */
+  /* background-color: #333; */
+  /* color: black; */
+}
+
+.navbar a {
+  /* float: left; */
+  font-size: 16px;
+  font-weight: 700;
+  /* color: black; */
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  outline: none;
+  color: black;
+  cursor: pointer;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.dropbtn2 {
+  font-size: 16px;
+  font-weight: 700;
+  width: 100%;
+  border: none;
+  outline: none;
+  color: white;
+  cursor: pointer;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.dropdown:hover .dropbtn {
+  color: #1dbac2;
+  /* border-bottom: 2px solid #1dbac2; */
+  text-decoration:underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 5px;
+}
+
+.navbar a:hover, .sub-category:hover .dropbtn2 {
+  color: #1dbac2;
+}
+
+
+.dropdown-content {
+  display: none;
+  float: left;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content button {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content2 {
+  display: none;
+  position: absolute;
+  margin-left: 160px;
+  margin-top: -42px;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 2;
+}
+
+.sub-category:hover .dropdown-content2 {
+  display: inline-block;
+}
+
+#icon {
+  padding-left: 5px;
 }
