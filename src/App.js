@@ -2,6 +2,7 @@ import './App.css';
 import NavBar from './components/NavBar.jsx';
 import Home from './components/Home.jsx';
 import BrowsingPage from './components/BrowsingPage.jsx';
+import EventsPage from './components/EventsPage.jsx';
 import {
   BrowserRouter as Router,
   Switch,
@@ -17,15 +18,12 @@ const App = () => {
         <NavBar />
         <Switch>
           <Route path="/event/:id">
-            {/* <About /> */}
-            {/* <h1>HELLO ABOUT</h1> */}
+            <EventsPage />
           </Route>
           <Route path="/browse/:category?/:subCategory?/:subSubCategory?">
             <BrowsingPage />
-            {/* <h1>browse</h1> */}
           </Route>
           <Route path="/">
-            {/* <h1>HELLO HOME</h1> */}
             <Home />
           </Route>
         </Switch>

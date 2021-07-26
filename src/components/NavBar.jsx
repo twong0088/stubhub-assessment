@@ -12,11 +12,9 @@ const useStyles = makeStyles((theme) => ({
   header: {
     backgroundColor: 'white',
     padding: '10px',
-    // paddingLeft: '100px',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    // border: '1px solid blue'
   },
   headerContent: {
     display: 'flex',
@@ -24,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-start',
     maxWidth: '1300px',
     width: '90vw'
-    // border: '1px solid blue'
   },
   headerContentRow: {
     display: 'flex',
