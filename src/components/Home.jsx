@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
   caption: {
     position: 'absolute',
     bottom: '25px',
-    left: '25px',
+    left: '50px',
     color: 'white',
     backgroundColor: '#3f1e76',
     width: "500px",
