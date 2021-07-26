@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { dummyData } from '../dummyData.js';
+// import * as actions from '../redux/actions.js';
+// import { connect } from 'react-redux';
 
+// const mapStateToProps = (store) => {
+//   return {
+//     cartInfo: store.cartReducer
+//   }
+// }
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -127,8 +134,12 @@ const BrowsingPage = (props) => {
     const parent = traverse(dummyData, data);
     const events = getChildren(parent, []);
 
+    // const cart = JSON.parse(localStorage.getItem('cart'));
+    // props.dispatch(actions.updateCart(cart));
+
     setPath(data);
     setResults(events);
+    props.setRefresh(!props.refresh)
   }, [])
 
   const handleChange = (idx) => {
@@ -243,3 +254,4 @@ const BrowsingPage = (props) => {
 }
 
 export default BrowsingPage;
+// export default connect(mapStateToProps)(BrowsingPage);

@@ -4,6 +4,15 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import ticket from '../images/ticket.png';
+import Badge from '@material-ui/core/Badge';
+// import * as actions from '../redux/actions.js';
+// import { connect } from 'react-redux';
+
+// const mapStateToProps = (store) => {
+//   return {
+//     cartInfo: store.cartReducer
+//   }
+// }
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,6 +35,8 @@ const useStyles = makeStyles((theme) => ({
   headerContentRow: {
     display: 'flex',
     flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between'
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -37,6 +48,10 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 'large',
     fontWeight: 'bold',
     alignItems: 'flex-end',
+    cursor: 'pointer'
+  },
+  shoppingIcon: {
+    color: 'black',
     cursor: 'pointer'
   }
 }));
@@ -79,15 +94,19 @@ const defaultHeader = {
   }
 }
 
-const NavBar = () => {
+const NavBar = (props) => {
   const classes = useStyles();
   const history = useHistory();
 
   const [header, setHeader] = useState({});
+  const [cartCount, setCartCount] = useState(0);
 
   useEffect(() => {
+    const cart = JSON.parse(localStorage.getItem('cart'));
+    setCartCount(cart.length);
     setHeader(defaultHeader);
-  }, [])
+    // props.dispatch(actions.updateCart(cart));
+  }, [props.refresh])
 
   return (
     <div className={classes.root}>
@@ -98,6 +117,16 @@ const NavBar = () => {
               <div className={classes.logo} onClick={() => {history.push('/')}}>
                 <img src={ticket} alt='logo'/>
                 <h3>Ticket Place</h3>
+              </div>
+              <div
+                className={classes.shoppingIcon}
+                onClick={() => {
+                  history.push('/checkout')
+                }}
+              >
+                <Badge badgeContent={cartCount} color="primary">
+                  <i id="icon" className="fa fa-shopping-cart fa-3x"></i>
+                </Badge>
               </div>
             </div>
             <div className="navbar">
@@ -167,3 +196,4 @@ const NavBar = () => {
 }
 
 export default NavBar;
+// export default connect(mapStateToProps)(NavBar);

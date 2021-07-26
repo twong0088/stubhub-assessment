@@ -5,6 +5,13 @@ export const addToCart = (item) => {
   }
 };
 
+export const updateCart = (cart) => {
+  return {
+    type: 'UPDATE CART',
+    payload: cart
+  }
+}
+
 export const removeFromCart = (idx) => {
   return {
     type: 'REMOVE_FROM_CART',

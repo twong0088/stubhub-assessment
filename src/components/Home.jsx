@@ -97,6 +97,7 @@ const Home = () => {
                 items.map( (item, i) => (
                   <Paper
                     className={classes.carouselCard}
+                    key={i}
                     onClick={() => {
                       history.push(`/browse/${item.path}`)
                     }}

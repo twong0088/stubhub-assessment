@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { eventsById } from '../dummyData.js';
-import * as actions from '../redux/actions.js';
-import { connect } from 'react-redux';
+// import * as actions from '../redux/actions.js';
+// import { connect } from 'react-redux';
 
-const mapStateToProps = (store) => {
-  return {
-    cartInfo: store.cartReducer
-  }
-}
+// const mapStateToProps = (store) => {
+//   return {
+//     cartInfo: store.cartReducer
+//   }
+// }
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -83,13 +83,11 @@ const EventsPage = (props) => {
   useEffect(() => {
     const url = window.location.pathname.split('/');
     const data = url.slice(2);
-    // console.log(eventsById[data[0]])
     setEventDetails(eventsById[data[0]]);
     setAvailableTickets(eventsById[data[0]].tickets)
   }, [])
 
   const addToCart = (eventDetails, ticketDetails) => {
-    console.log(eventDetails);
     const { date, dayOfWeek, location, venue, name} = eventDetails;
     const checkoutDetails = {
       date: date,
@@ -99,7 +97,13 @@ const EventsPage = (props) => {
       name: name,
       ...ticketDetails
     };
-    props.dispatch(actions.addToCart(checkoutDetails));
+    let cart = localStorage.getItem('cart') || '[]';
+    let cartArr = JSON.parse(cart);
+    cartArr = [...cartArr, checkoutDetails];
+    cart = JSON.stringify(cartArr);
+    localStorage.setItem('cart', cart)
+    props.setRefresh(!props.refresh)
+    // props.dispatch(actions.addToCart(checkoutDetails));
   }
 
   return (
@@ -128,7 +132,6 @@ const EventsPage = (props) => {
                   <button
                     className={classes.atc}
                     onClick={() => {
-                      // console.log(eventDetails, ticket)
                       addToCart(eventDetails, ticket)
                     }}
                   >
@@ -144,4 +147,5 @@ const EventsPage = (props) => {
   );
 }
 
-export default connect(mapStateToProps)(EventsPage);
+export default EventsPage;
+// export default connect(mapStateToProps)(EventsPage);
