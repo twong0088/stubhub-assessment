@@ -124,7 +124,7 @@ const NavBar = (props) => {
                   history.push('/checkout')
                 }}
               >
-                <Badge badgeContent={cartCount} color="primary">
+                <Badge badgeContent={cartCount} color="secondary">
                   <i id="icon" className="fa fa-shopping-cart fa-3x"></i>
                 </Badge>
               </div>

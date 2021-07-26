@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
     backgroundColor: '#f6f8f9',
-    height: '75vh'
+    height: '85vh'
   },
   container: {
     marginTop: '10px',
