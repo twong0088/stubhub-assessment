@@ -1,5 +1,6 @@
 const faker = require('faker');
 let id = 1;
+const eventsById = {};
 const dummyData = {
   'Sports': {
     'MLB': {
@@ -42,7 +43,7 @@ const traverse = (head) => {
   if (!Array.isArray(head)) {
     for (let key in head) {
       if (Array.isArray(head[key])) {
-        head[key] = generateEvents()
+        head[key] = generateEvents(key)
       } else {
         traverse(head[key])
       }
@@ -53,7 +54,7 @@ const traverse = (head) => {
 var days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 
 
-const generateEvents = () => {
+const generateEvents = (key) => {
   const events = [];
   const locations = [
     {
@@ -89,14 +90,17 @@ const generateEvents = () => {
 
     const event = {
       id: id,
+      name: key,
       date: `${mo} ${da} ${ye}`,
-      dateDetails: `${dayOfWeek} ${time}`,
+      dayOfWeek: dayOfWeek,
+      time: time,
       venue: locationInfo.venue,
       location: locationInfo.city,
       lowestPrice: ticketsInfo.lowestPrice,
       tickets: ticketsInfo.tickets
     }
     events.push(event);
+    eventsById[id] = event
     id++;
   }
   return events;
@@ -105,13 +109,13 @@ const generateEvents = () => {
 const generateTickets = () => {
   const tickets = []
   let lowestPrice = Number.POSITIVE_INFINITY;
-  const section = ['a', 'b', 'c', 'd']
+  const section = ['A', 'B', 'C', 'D']
   for (let i = 0; i < 100; i++) {
     const price = Math.floor(Math.random() * 2000) + 30;
     lowestPrice = Math.min(lowestPrice, price)
     const ticket = {
       section: section[i % section.length],
-      seat: Math.floor(Math.random() * 50),
+      seat: Math.floor(Math.random() * 50) + 1,
       price: price
     }
     tickets.push(ticket)
@@ -124,4 +128,6 @@ const generateTickets = () => {
 
 traverse(dummyData);
 
-export default dummyData;
+// console.log('eventsById: ', eventsById);
+exports.dummyData = dummyData;
+exports.eventsById = eventsById;

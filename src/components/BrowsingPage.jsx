@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import dummyData from '../dummyData.js';
+import { dummyData } from '../dummyData.js';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -205,10 +205,11 @@ const BrowsingPage = (props) => {
               >
                 <div className={classes.eventInfo}>
                   <div className={classes.timeInfo}>
-                    <div className={classes.fineText}>{result.dateDetails}</div>
+                    <div className={classes.fineText}>{`${result.dayOfWeek} ${result.time}`}</div>
                     <div className={classes.text}>{result.date}</div>
                   </div>
                   <div className={classes.locationInfo}>
+                    <div className={classes.fineText}>{result.name}</div>
                     <div className={classes.fineText}>{result.venue}</div>
                     <div className={classes.text}>{result.location}</div>
                   </div>
