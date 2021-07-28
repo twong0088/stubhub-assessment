@@ -110,6 +110,17 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: '700',
     fontSize: '16px'
   },
+  checkoutButtonDisabled: {
+    width: '200px',
+    marginLeft: '15px',
+    height: '35px',
+    cursor: 'not-allowed',
+    borderRadius: '100px 100px 100px 100px',
+    backgroundColor: '#cccccc',
+    color: '#666666',
+    fontWeight: '700',
+    fontSize: '16px'
+  },
   breakdownDetails: {
     paddingTop: '10px',
     fontWeight: '700'
@@ -125,13 +136,8 @@ const CheckoutPage = (props) => {
   useEffect(() => {
     const cartData = JSON.parse(localStorage.getItem('cart'));
     // props.dispatch(actions.updateCart(cart));
-    let cost = 0;
-    cartData.forEach(item => {
-      cost += (item.price * 2);
-    })
-
-    setSubTotal(cost);
     setCart(cartData);
+    updateSubTotal(cartData);
   }, [])
 
   const removeFromCart = (idx) => {
@@ -139,8 +145,18 @@ const CheckoutPage = (props) => {
     newCart.splice(idx, 1);
     localStorage.setItem('cart', JSON.stringify(newCart));
     setCart(newCart);
+    updateSubTotal(newCart);
     props.setRefresh(!props.refresh);
     // props.dispatch(actions.updateCart(newCart));
+  }
+
+  const updateSubTotal = (newCart) => {
+    let cost = 0;
+    newCart.forEach(item => {
+      cost += (item.price * 2);
+    })
+
+    setSubTotal(cost);
   }
 
   return (
@@ -192,7 +208,7 @@ const CheckoutPage = (props) => {
               <span className={classes.breakdownDetails}>Total: ${Math.round(subTotal * 1.1)}</span>
             </div>
             <button
-              className={classes.checkoutButton}
+              className={cart.length === 0 ? classes.checkoutButtonDisabled : classes.checkoutButton}
             >
               Checkout Now
             </button>
