@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Carousel from 'react-material-ui-carousel';
 import { Paper } from '@material-ui/core';
+import { eventsById } from '../dummyData.js';
+import EventsList from './EventsList.jsx';
 import nfl from '../images/nfl.png';
 import music_festival from '../images/music_festival.jpeg';
 import mlb from '../images/baseball.jpeg';
@@ -80,7 +82,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Home = () => {
+const Home = (props) => {
   const classes = useStyles();
   const history = useHistory();
 
@@ -111,6 +113,11 @@ const Home = () => {
             }
         </Carousel>
         <img className={classes.placeholder} src={home} alt="home"/>
+        <EventsList
+          eventDetails={eventsById[1]}
+          availableTickets={eventsById[1].tickets}
+          {...props}
+        />
       </div>
     </div>
   );

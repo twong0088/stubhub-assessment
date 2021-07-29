@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { eventsById } from '../dummyData.js';
+import EventsList from './EventsList.jsx';
 // import * as actions from '../redux/actions.js';
 // import { connect } from 'react-redux';
 
@@ -47,38 +48,14 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between'
-  },
-  sectionLeft: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    marginLeft: '20px'
-  },
-  sectionRight: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginRight: '20px'
-  },
-  price: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
-  },
-  atc: {
-    width: '70px',
-    marginLeft: '15px',
-    cursor: 'pointer',
-    borderRadius: '100px 100px 100px 100px',
-    backgroundColor: '#3f1e76',
-    color: "#ffffff"
   }
 }));
 
 const EventsPage = (props) => {
   const classes = useStyles();
-  const [eventDetails, setEventDetails] = useState(0)
+  const [eventDetails, setEventDetails] = useState({})
   const [availableTickets, setAvailableTickets] = useState([]);
+
 
   useEffect(() => {
     const url = window.location.pathname.split('/');
@@ -87,25 +64,6 @@ const EventsPage = (props) => {
     setAvailableTickets(eventsById[data[0]].tickets)
   }, [])
 
-  const addToCart = (eventDetails, ticketDetails) => {
-    const { date, dayOfWeek, location, venue, name} = eventDetails;
-    const checkoutDetails = {
-      date: date,
-      dayOfWeek: dayOfWeek,
-      location: location,
-      venue: venue,
-      name: name,
-      ...ticketDetails
-    };
-    let cart = localStorage.getItem('cart') || '[]';
-    let cartArr = JSON.parse(cart);
-    cartArr = [...cartArr, checkoutDetails];
-    cart = JSON.stringify(cartArr);
-    localStorage.setItem('cart', cart)
-    props.setRefresh(!props.refresh)
-    // props.dispatch(actions.addToCart(checkoutDetails));
-  }
-
   return (
     <div className={classes.root}>
       <div className={classes.container}>
@@ -113,35 +71,11 @@ const EventsPage = (props) => {
           <div className={classes.text}>{eventDetails.name}</div>
           <div className={classes.fineText}>{eventDetails.dayOfWeek}, {eventDetails.date} • {eventDetails.time} at {eventDetails.venue}, {eventDetails.location}</div>
         </div>
-        {
-          availableTickets.map((ticket, idx) => (
-            <div
-              className={classes.ticket}
-              key={idx}
-            >
-              <div className={classes.sectionLeft}>
-                <div>Section: {ticket.section}</div>
-                <div>Seat: {ticket.seat} - {ticket.seat + 1}</div>
-              </div>
-              <div className={classes.sectionRight}>
-                <div className={classes.price}>
-                  <div>${ticket.price}</div>
-                  <span>each</span>
-                </div>
-                <div>
-                  <button
-                    className={classes.atc}
-                    onClick={() => {
-                      addToCart(eventDetails, ticket)
-                    }}
-                  >
-                    Add to Cart
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))
-        }
+        <EventsList
+          availableTickets={availableTickets}
+          eventDetails={eventDetails}
+          {...props}
+        />
       </div>
     </div>
   );

@@ -118,6 +118,12 @@ const generateTickets = () => {
       seat: Math.floor(Math.random() * 50) + 1,
       price: price
     }
+
+    if (i === 0) {
+      ticket.salePrice = Math.round(price / 2);
+      ticket.saleExpiration = faker.date.future();
+    }
+
     tickets.push(ticket)
   }
   return {
@@ -128,6 +134,5 @@ const generateTickets = () => {
 
 traverse(dummyData);
 
-// console.log('eventsById: ', eventsById);
 exports.dummyData = dummyData;
 exports.eventsById = eventsById;
